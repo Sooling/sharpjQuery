@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		#box{
+			width: 50px;
+			height: 50px;
+			background-color: #f40;
+		}
+	</style>
+	<body>
+		<div id="box">
+			box
+		</div>
+		<script src="../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#box").mouseover(function(){
+					//if(!$(this).is(":animated")){
+						$(this)
+						.animate({height:"300px"},1000)
+						.animate({width:"300px"},400);
+					
+					
+				}).mouseout(function(){
+					//鼠标移出时移入的动画正在执行，也就是处于运动状态，此时移出的动画不会执行。
+					//if(!$(this).is(":animated")){
+						$(this).stop(true,true)
+						.animate({height:"50px"},1000)
+						.animate({width:"50px"},400);
+					//};
+					
+				})
+			});
+		</script>
+	</body>
+</html>

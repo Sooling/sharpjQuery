@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.fruit{
+				margin-right: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="#" method="post">
+			<fieldset id="">
+				<legend>多选</legend>
+				<div>
+					<input type="checkbox" id="changeCheck"><label>全选/全不选</label>
+				</div>
+				<div id="item-box">
+					<label>苹果</label><input type="checkbox" value="苹果" class="fruit">
+					<label>橘子</label><input type="checkbox" value="橘子" class="fruit">
+					<label>香蕉</label><input type="checkbox" value="香蕉" class="fruit">
+					<label>西瓜</label><input type="checkbox" value="西瓜" class="fruit">
+					<label>哈密瓜</label><input type="checkbox" value="哈密瓜" class="fruit">
+				</div>
+			</fieldset>
+			<input type="submit" value="提交"/>
+		</form>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready( function(){
+				var $checkbox = $( "#item-box input[type='checkbox']" );
+				var $changeCheck = $( "#changeCheck" );
+				
+				$changeCheck.click( function(){
+					if( $( this ).is( ":checked" ) ){
+						$checkbox.prop( "checked" , true );
+					}else{
+						$checkbox.prop( "checked" , false );
+					};
+				} );				
+				
+				/* $checkbox.click( function(){
+					var flag = true;
+					$checkbox.each( function(){
+						if( !$(this).is( ":checked") ){
+							flag = false;							
+						};						
+					} );
+					$changeCheck.prop( "checked" , flag );
+				} ); */
+				
+				//这是第二种实现思路
+				//根据复选框的总数和被选中的数量的比较
+				$checkbox.click( function(){					
+					$changeCheck.prop( "checked" , $checkbox.length === $checkbox.filter(":checked").length );
+				} );
+				
+			} );
+		</script>
+	</body>
+</html>

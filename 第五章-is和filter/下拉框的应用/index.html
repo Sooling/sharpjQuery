@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			select{
+				height: 100px;
+				width: 80px;
+			}			
+			.change{
+				background-color: #FF4400;
+				color: #333;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="">
+			<fieldset id="">
+				<legend>下拉框的应用</legend>
+				<select multiple="multiple" name="fruit" id="fruit">
+					<option value="苹果">苹果</option>
+					<option value="西瓜">西瓜</option>
+					<option value="橘子">橘子</option>
+				</select>
+				<select multiple="multiple" name="vegetables" id="vegetable">
+					<option value="黄瓜">黄瓜</option>
+					<option value="茄子">茄子</option>
+					<option value="西红柿">西红柿</option>
+				</select>
+				<div>
+					<input type="button" name="add" id="add" value="移动选中项" />
+					<input type="button" name="addAll" id="addAll" value="移动所有项" />
+				</div>
+			</fieldset>
+		</form>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $fruit = $("#fruit");
+				var $vegetable = $("#vegetable");
+				var $friut_item = $("#fruit > option");
+				var $vegetable_item = $("#vegetable > option");
+				
+				$friut_item.click(function(event){
+					
+					if(!$(this).hasClass("change")){
+						$(this).addClass("change");
+					}else{
+						$(this).removeClass("change");
+					};
+				});
+				
+				//移动选中项
+				$("#add").click(function(){
+					$(".change").appendTo($vegetable);
+				});
+				
+				//移动所有项
+				$("#addAll").click(function(){
+					$friut_item.appendTo($vegetable);
+				});
+				
+				//双击移动
+				$friut_item.dblclick(function(){
+					$(this).appendTo($vegetable);
+				});
+				
+			});
+		</script>
+	</body>
+</html>

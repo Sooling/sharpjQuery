@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="" method="post" id="myForm">
+			<fieldset id="">
+				<legend></legend>
+				<div>
+					<input type="button" name="gt" id="gt" value="变高" />
+					<input type="button" name="lt" id="lt" value="缩短" />
+				</div>
+				<textarea rows="" cols="" id="txt">
+					
+				</textarea>
+			
+			</fieldset>
+		</form>
+	</body>
+	<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$( document ).ready( function(){
+			$txt = $( "#txt" );
+			$( "#gt" ).click( function(){
+				if( $txt.height() < 200 ){
+					$txt.animate( {height: "+=50px"} , 400 );
+				};
+			});
+			
+			$( "#lt" ).click( function(){
+				console.log( $txt.height() );
+				if( $txt.height() > 80 ){
+					$txt.animate( {height: "-=50px"} , 400 );
+				};
+			})
+		});
+	</script>
+</html>

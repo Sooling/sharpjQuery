@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			ul,li{
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			ul{
+				width: 300px;
+			}
+			ul>li{
+				height: 200px;
+			}
+			li.show{
+				display: block;
+			}
+			li.hide{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="chose">
+			<input style="background-color: #00FF00;" type="button" value="选项一">
+			<input style="background-color: #FF0000;" type="button" value="选项二">
+			<input style="background-color: #FFCCCC;" type="button" value="选项三">
+		</div>
+		<ul>
+			<li style="background-color: #00FF00;" class="show"></li>
+			<li style="background-color: #FF0000;" class="hide"></li>
+			<li style="background-color: #FFCCCC;" class="hide"></li>
+		</ul>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $chose_btn = $("#chose>input");
+				var $item = $("ul>li")
+				
+				$chose_btn.click(function(){
+					var index = $chose_btn.index(this);
+					//获取当前点击按钮的索引值
+					//关键！
+					
+					$item.eq(index).show().siblings().hide();
+					
+				});			
+			});
+		</script>
+	</body>
+</html>

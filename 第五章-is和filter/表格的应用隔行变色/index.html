@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			table {
+			    font-family: verdana,arial,sans-serif;
+			    font-size:11px;
+			    color:#333333;
+			    border-width: 1px;
+			    border-color: #666666;
+			    border-collapse: collapse;
+				/* width: 200px; */
+			}
+			table th {
+			    border-width: 1px;
+			    padding: 8px;
+			    border-style: solid;
+			    border-color: #666666;
+			    background-color: #dedede;
+				width: 45px;
+			}
+			table td {
+			    border-width: 1px;
+			    padding: 8px;
+			    border-style: solid;
+			    border-color: #666666;
+				width: 45px;
+			}
+			.even{
+				background-color: #FFF38F;
+			}
+			.odd{
+				background-color: #FFFFEE;
+			}
+			.ch_radio{
+				background-color: #FFCCCC;
+			}
+			.ch_checkbox{
+				background-color: #FFCCCC;
+			}
+		</style>
+	</head>
+	<body>
+		<table onselectstart="return false" border="1px solid #000000" cellspacing="" cellpadding="">
+			<!-- onselectstart="return false"取消选中文字 -->
+			<thead>
+				<tr><th colspan="4"><label for="filter_name">筛选：</label><input type="text" id="filter_name"></th></tr>
+				<tr>
+					<th>选择</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>地址</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="parent" id="row_01"><td colspan="4">前台人员</td></tr>
+				<tr class="row_01">
+					<!-- <td><input type="radio" value="李四" name="name"></td> -->
+					<td><input type="checkbox" value="李四" name="name"></td>
+					<td>李四</td>
+					<td>男</td>
+					<td>河南</td>
+				</tr>
+				<tr class="row_01">
+					<!-- <td><input type="radio" value="王五" name="name"></td> -->
+					<td><input type="checkbox" value="王五" name="name"></td>
+					<td>王五</td>
+					<td>女</td>
+					<td>海南</td>
+				</tr>
+				<tr class="row_01">
+					<!-- <td><input type="radio" value="张华" name="name"></td> -->
+					<td><input type="checkbox" value="张华" name="name"></td>
+					<td>张华</td>
+					<td>男</td>
+					<td>山东</td>
+				</tr>
+				<tr class="parent" id="row_02"><td colspan="4">后台人员</td></tr>
+				<tr class="row_02">
+					<!-- <td><input type="radio" value="大虎" name="name"></td> -->
+					<td><input type="checkbox" value="大虎" name="name"></td>
+					<td>大虎</td>
+					<td>女</td>
+					<td>巴基斯坦</td>
+				</tr>
+				<tr class="row_02">
+					<!-- <td><input type="radio" value="小虎" name="name"></td> -->
+					<td><input type="checkbox" value="小虎" name="name"></td>
+					<td>小虎</td>
+					<td>男</td>
+					<td>乌克兰</td>
+				</tr>
+				<tr class="row_02">
+					<!-- <td><input type="radio" value="翠花" name="name"></td> -->
+					<td><input type="checkbox" value="翠花" name="name"></td>
+					<td>翠花</td>
+					<td>女</td>
+					<td>泸州</td>
+				</tr>
+			</tbody>
+		</table>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//奇偶行变色
+				$("tbody>tr:not('.parent'):even").addClass("even");
+				$("tbody>tr:not('.parent'):odd").addClass("odd");
+				
+				//单选框高亮
+				/* var $radio = $("tbody>tr>td>input:radio");
+				$radio.click(function(){
+					var $tr = $(this).parent().parent();
+					$tr.siblings().removeClass("ch_radio");
+					
+					$tr.addClass("ch_radio");
+				});
+				
+				$radio.each(function(){
+					if($(this).is(":checked")){
+						var $tr = $(this).parent().parent();
+						
+						$tr.addClass("ch_radio");
+					};
+				}); */
+				
+				//复选框高亮
+				var $checkbox = $("tbody>tr>td>input:checkbox");
+				$checkbox.click(function(event){
+					var $tr = $(this).parent().parent();
+					
+					if($(this).is(":checked")){
+						$tr.addClass("ch_checkbox");
+					}else{
+						$tr.removeClass("ch_checkbox");
+					};
+					
+					event.stopPropagation();//阻止事件冒泡
+				});
+				
+				//刷新选中
+				$checkbox.each(function(){
+					if($(this).is(":checked")){
+						var $tr = $(this).parent().parent();
+						
+						$tr.addClass("ch_checkbox");
+					};
+				});
+				
+				//选中高亮
+				var $tbody_tr = $("tbody>tr:not('.parent')");
+				
+				$tbody_tr.click(function(){
+					var $this_checkbox = $(this).find("input:checkbox");
+					
+					if($this_checkbox.is(":checked")){
+						$(this).removeClass("ch_checkbox");
+						$this_checkbox.prop("checked",false);						
+					}else{
+						$(this).addClass("ch_checkbox");
+						$this_checkbox.prop("checked",true);						
+					};
+				});
+				
+				//展开/关闭表格行
+				var $tr_parent = $("tbody>tr.parent");
+				var $filter_name = $("#filter_name");
+				
+				$tr_parent.click(function(){
+					if($filter_name[0].value !== "" && $tbody_tr.filter(":contains('"+$filter_name.val()+"')").length > 0){
+						//筛选输入框值不为空，且有符合输入内容的表格
+						//console.log($tbody_tr.filter(":contains('"+$filter_name.val()+"')"));
+						//console.log($filter_name[0].value === "");
+						return false;
+					}else{
+						$(this).siblings("."+this.getAttribute("id")).toggle();
+						//利用toggle方法显示和隐藏
+					};					
+				});
+				
+				//表格筛选
+				$filter_name.keyup(function(){
+					$tbody_tr.hide().filter(":contains('"+$(this).val()+"')").show();
+				}).keyup();
+				//刷新时立即执行keyup方法
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./style/color.css"/>
+	</head>
+	<body>
+		<form action="#" method="post" id="regForm">
+			<fieldset id="">
+				<legend>个人信息</legend>
+				<div>
+					<label for="username">名称：</label>
+					<input type="text" name="username" id="username" value="" />
+				</div>
+				<div>
+					<label for="passworld">密码：</label>
+					<input type="password" name="passworld" />
+				</div>
+				<div>
+					<label for="msg">详细信息：</label>
+					<textarea rows="20" cols="40">
+						
+					</textarea>
+				</div>
+			</fieldset>
+			<input type="submit" value="提交"/>
+		</form>
+	</body>
+	<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#regForm div input")
+			.focus(function(){
+				$(this).addClass("focus");
+			})
+			.blur(function(){
+				$(this).removeClass("focus");
+			});
+		});
+	</script>
+</html>

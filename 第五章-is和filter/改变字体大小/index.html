@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="control">
+			<input type="button" class="bigger" value="放大">
+			<input type="button" class="smaller" value="缩小">
+		</div>
+		<p id="text">
+			大家好，我是大国辉！my name is Daguohui
+		</p>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $text = $("#text");
+				
+				$("#control>input").click(function(){
+					
+					var $fontSize = $text.css("font-size");
+					
+					var sizeNum = parseInt($fontSize,10);
+					var sizeUnit = $fontSize.slice(-2);
+					
+					if(this.className === "bigger"){
+						sizeNum+=2;
+						$text.stop().animate({fontSize: sizeNum+sizeUnit},200);
+					}else if(this.className === "smaller"){
+						sizeNum-=2;
+						$text.stop().animate({fontSize: sizeNum+sizeUnit},200);
+					};
+					
+				});
+			});
+		</script>
+	</body>
+</html>

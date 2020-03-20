@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p><a href="#" title="这是我的超链接提示。" class="tooltip">提示</a></p>
+		<script src="../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				
+				$("a.tooltip")
+				.mouseover(function(e){
+					this.myTitle = this.title;
+					this.title = "";
+					
+					var tooltip = "<div id ='tooltip'>" + this.myTitle + "</div>";
+					$("body").append(tooltip);
+					$("div#tooltip").css({
+						"position": "absolute",
+						"left": e.clientX + 10 + "px",
+						"top": e.clientY + 20 + "px"
+					}).show("fast");
+					
+					//return false;
+					//如何不显示默认的title提示？
+					//让title的值为空即可
+				})
+				.mouseout(function(){
+					$("div#tooltip").remove();
+					//移除元素
+					this.title = this.myTitle;
+				})
+				.mousemove(function(e){
+					$("div#tooltip").css({
+						"left": e.clientX + 10 + "px",
+						"top": e.clientY + 20 + "px"
+					});
+				});
+				
+			});
+		</script>
+	</body>
+</html>

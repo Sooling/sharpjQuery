@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		ul,li{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+		#skin{
+			height: 30px;
+		}
+		#skin>li{
+			width: 50px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			float: left;
+			cursor: pointer;
+		}
+		div.text{
+			margin-top: 20px;
+		}
+	</style>
+	<link id="skinfile" rel="stylesheet" type="text/css" href="style/red.css"/>
+	<body>
+		<ul id="skin">
+			<li id="red" style="color: red;">red</li>
+			<li id="blue" style="color: blue;">blue</li>
+			<li id="yellow" style="color: yellow;">yellow</li>
+		</ul>
+		<div class="text">
+			我们曾终日游荡在后面的青山上。友谊地久天长。
+		</div>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../carhartl-jquery-cookie/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				var $skinLink = $("#skinfile");
+				
+				$("#skin>li").click(function(){
+					$skinLink.attr("href","style/"+this.id+".css");
+					
+					$.cookie("myskin",this.id,{path:"/",expires:10});
+				});
+				
+				var $myskin = $.cookie("myskin");
+				if($myskin){
+					$skinLink.attr("href","style/"+$myskin+".css");
+					
+					$.cookie("myskin",$myskin,{path:"/",expires:10});
+				};
+				
+			});
+		</script>
+	</body>
+</html>

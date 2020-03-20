@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.high{
+				color: #FF0000;
+			}
+			.error{
+				background-color: #FF0000;
+				color: #FFFFFF;
+			}
+			.success{
+				background-color: #00FF00;
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="" method="post">
+			<div class="int">
+				<label for="username">用户名：</label>
+				<input type="text" id="username" class="required">
+			</div>
+			<div class="int">
+				<label for="username">密码：</label>
+				<input type="password" id="password" class="required">
+			</div>
+			<div class="int">
+				<input type="submit" id="send" value="提交"/>
+			</div>			
+		</form>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$input_required = $("form :input.required");
+			
+			//添加星号
+			$(function(){
+				$input_required.each(function(){
+					var $star = $("<span class = 'high'>*</span>");
+					$(this).parent().append($star);
+				});
+			});
+			
+			//验证
+			function testing(){
+				
+				var $parent = $(this).parent();
+				
+				$parent.find(".cue").remove();
+				
+				if($(this).is("#username")){
+					if(this.value === "" || this.value.length < 3){
+						var $onError = $("<span class = 'cue error'>请输入至少3个字符！</span>");
+						$parent.append($onError);
+					}else{
+						var $onSuccess = $("<span class = 'cue success'>输入正确！</span>");
+						$parent.append($onSuccess);
+					}
+				};
+				
+				if($(this).is("#password")){
+					if(this.value === "" || this.value.length < 6){
+						var $onError = $("<span class = 'cue error'>密码至少为6个字符！</span>");
+						$parent.append($onError);
+					}else{
+						var $onSuccess = $("<span class = 'cue success'>输入正确！</span>");
+						$parent.append($onSuccess);
+					}
+				};
+				
+			}
+			
+			//失去焦点验证
+			$input_required.blur(testing);
+			
+			//刷新页面验证
+			//$input_required.each(testing);
+			
+			//输入实时验证
+			$input_required.keyup(testing);
+			
+			//提交验证
+			$("#send").click(function(){
+				
+				//刷新页面，提交时整体验证
+				$input_required.each(testing);
+				
+				if($(".error").length > 0){
+					alert("用户名或密码输入错误，不能提交！");
+					return false;
+				}else{
+					alert("提交成功！");
+				};
+				
+			});
+			
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.fruit{
+				margin-right: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="#" method="post">
+			<fieldset id="">
+				<legend>多选</legend>
+				<div>
+					<input type="button" value="全选" id="checkAll">
+					<input type="button" value="全不选" id="uncheckAll">
+					<input type="button" value="反选" id="inverse">
+				</div>
+				<div id="item-box">
+					<label>苹果</label><input type="checkbox" value="苹果" class="fruit">
+					<label>橘子</label><input type="checkbox" value="橘子" class="fruit">
+					<label>香蕉</label><input type="checkbox" value="香蕉" class="fruit">
+					<label>西瓜</label><input type="checkbox" value="西瓜" class="fruit">
+					<label>哈密瓜</label><input type="checkbox" value="哈密瓜" class="fruit">
+				</div>
+			</fieldset>
+			<input type="submit" value="提交"/>
+		</form>
+		<script src="../../jquery-3.4.1/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready( function(){
+				$checkbox = $( "#item-box input[type='checkbox']" );
+				
+				//全选
+				$( "#checkAll" ).click( function(){
+					$checkbox.prop( "checked" , true );
+				} );
+				
+				//全不选
+				$( "#uncheckAll" ).click( function(){
+					$checkbox.prop( "checked" , false );
+				} );
+				
+				//反选
+				//!$(this).attr("checked") 这种写法在浏览器中的体验上并不好
+				//改成!$(this).is(":checked")
+				$( "#inverse" ).click( function(){
+					$checkbox.each( function(){
+						$(this).prop( "checked" , !$(this).is(":checked") );
+					} );
+				} );
+				
+				
+			} );
+		</script>
+	</body>
+</html>
